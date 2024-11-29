@@ -1,0 +1,220 @@
+<div class="container">
+    <h2 class="text-center mb-4">Role Management</h2>
+    <div class="card shadow-sm border-radius mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5>Administrators</h5>
+            <button class="btn btn-light btn-sm float-end" data-bs-toggle="modal" data-bs-target="#addAdminModal">Add Administrator</button>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <% admins.forEach(admin => { %>
+                    <tr>
+                        <td><%= admin.user_id %></td>
+                        <td><%= admin.first_name %> <%= admin.last_name %></td>
+                        <td><%= admin.email %></td>
+                        <td>
+                            <form action="/admin/delete-admin" method="POST" class="d-inline">
+                                <input type="hidden" name="userId" value="<%= admin.user_id %>">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-radius">
+        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+            <h5>Editors and Researchers</h5>
+            <div>
+                <button id="updateBtn" class="btn btn-primary btn-sm" disabled>Update</button>
+                <button id="deleteBtn" class="btn btn-danger btn-sm" disabled>Delete</button>
+                <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped" id="userTable">
+                <thead>
+                    <tr>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.user_id %></td>
+                        <td><%= user.first_name %> <%= user.last_name %></td>
+                        <td><%= user.email %></td>
+                        <td>
+                            <select name="role" class="form-select form-select-sm w-auto">
+                                <option value="researcher" <%= user.role === 'researcher' ? 'selected' : '' %>>Researcher</option>
+                                <option value="editor" <%= user.role === 'editor' ? 'selected' : '' %>>Editor</option>
+                                <option value="administrator" <%= user.role === 'administrator' ? 'selected' : '' %>>Administrator</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Add Admin Modal -->
+<div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAdminModalLabel">Add Administrator</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/add-admin" method="POST">
+                    <div class="mb-3">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add User Modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/add-user" method="POST">
+                    <div class="mb-3">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role</label>
+                        <select class="form-select" id="role" name="role" required>
+                            <option value="researcher">Researcher</option>
+                            <option value="editor">Editor</option>
+                            <option value="administrator">Administrator</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const userTable = document.getElementById('userTable');
+        const updateBtn = document.getElementById('updateBtn');
+        const deleteBtn = document.getElementById('deleteBtn');
+        let selectedRow = null;
+
+        userTable.addEventListener('click', function(event) {
+            const target = event.target.closest('tr');
+            if (!target) return;
+
+            if (selectedRow) {
+                selectedRow.classList.remove('table-active');
+                selectedRow.querySelector('select').disabled = true;
+            }
+
+            selectedRow = target;
+            selectedRow.classList.add('table-active');
+            selectedRow.querySelector('select').disabled = false;
+            updateBtn.disabled = false;
+            deleteBtn.disabled = false;
+        });
+
+        updateBtn.addEventListener('click', function() {
+            if (!selectedRow) return;
+
+            const userId = selectedRow.cells[0].innerText;
+            const role = selectedRow.querySelector('select').value;
+
+            fetch('/admin/update-role', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userId, role })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Role updated successfully');
+                } else {
+                    alert('Error updating role');
+                }
+            });
+        });
+
+        deleteBtn.addEventListener('click', function() {
+            if (!selectedRow) return;
+
+            const userId = selectedRow.cells[0].innerText;
+
+            fetch('/admin/delete-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userId })
+            }).then(response => {
+                if (response.ok) {
+                    selectedRow.remove();
+                    alert('User deleted successfully');
+                } else {
+                    alert('Error deleting user');
+                }
+            });
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

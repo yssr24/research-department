@@ -1,0 +1,71 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Submitted Papers</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Researcher</th>
+                        <th>Category</th>
+                        <th>Submission Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% papers.forEach(paper => { %>
+                    <tr>
+                        <td><%= paper.title %></td>
+                        <td><%= paper.first_name %> <%= paper.last_name %></td>
+                        <td><%= paper.category %></td>
+                        <td><%= paper.submission_date %></td>
+                        <td>
+                            <button class="btn btn-primary view-btn" data-paper='<%= JSON.stringify(paper) %>'>View</button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <div id="paper-details" class="card" style="display: none;">
+                <div class="card-header">Paper Details</div>
+                <div class="card-body">
+                    <h5 id="paper-title"></h5>
+                    <p><strong>Researcher:</strong> <span id="paper-researcher"></span></p>
+                    <p><strong>Category:</strong> <span id="paper-category"></span></p>
+                    <p><strong>Abstract:</strong></p>
+                    <p id="paper-abstract"></p>
+                    <p><strong>Keywords:</strong> <span id="paper-keywords"></span></p>
+                    <a id="paper-file" href="#" target="_blank" class="btn btn-secondary">Download Paper</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const viewButtons = document.querySelectorAll('.view-btn');
+        const paperDetails = document.getElementById('paper-details');
+        const paperTitle = document.getElementById('paper-title');
+        const paperResearcher = document.getElementById('paper-researcher');
+        const paperCategory = document.getElementById('paper-category');
+        const paperAbstract = document.getElementById('paper-abstract');
+        const paperKeywords = document.getElementById('paper-keywords');
+        const paperFile = document.getElementById('paper-file');
+
+        viewButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const paper = JSON.parse(this.getAttribute('data-paper'));
+                paperTitle.textContent = paper.title;
+                paperResearcher.textContent = `${paper.first_name} ${paper.last_name}`;
+                paperCategory.textContent = paper.category;
+                paperAbstract.textContent = paper.abstract;
+                paperKeywords.textContent = paper.keywords;
+                paperFile.href = `/uploads/${paper.file_path}`;
+                paperDetails.style.display = 'block';
+            });
+        });
+    });
+</script>

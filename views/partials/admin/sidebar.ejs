@@ -1,0 +1,44 @@
+<div class="sidebar">
+    <div class="sidebar-logo">
+        Admin Dashboard
+    </div>
+    <ul class="nav flex-column mt-3">
+        <li class="nav-item">
+            <a class="nav-link" href="/admin">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#userManagementSubmenu" data-bs-toggle="collapse">User Management</a>
+            <div id="userManagementSubmenu" class="collapse">
+                <ul class="nav flex-column ms-3">
+                    <li><a class="nav-link" href="/admin/user-approval">User Approvals</a></li>
+                    <li><a class="nav-link" href="/admin/role-permissions">Roles & Permissions</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#journalManagementSubmenu" data-bs-toggle="collapse">Journal Management</a>
+            <div id="journalManagementSubmenu" class="collapse">
+                <ul class="nav flex-column ms-3">
+                    <li><a class="nav-link" href="/admin/manuscript">Manuscript Submissions</a></li>
+                    <li><a class="nav-link" href="#">Peer Reviews</a></li>
+                    <li><a class="nav-link" href="#">Publication Tracking</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#analyticsSubmenu" data-bs-toggle="collapse">Analytics & Reports</a>
+            <div id="analyticsSubmenu" class="collapse">
+                <ul class="nav flex-column ms-3">
+                    <li><a class="nav-link" href="#">Usage Statistics</a></li>
+                    <li><a class="nav-link" href="#">Custom Reports</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">System Settings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/logout">Logout</a>
+        </li>
+    </ul>
+</div>

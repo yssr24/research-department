@@ -1,0 +1,60 @@
+<div class="left-section mt-3">
+    <!-- Create New File Button -->
+    <div class="create-new-btn">
+        <button class="btn btn-primary">
+            <i class="fas fa-file"></i> Create New File
+        </button>
+    </div>
+
+    <!-- Form Section -->
+    <div class="container">
+        <form action="/submitNewPaper" method="POST" enctype="multipart/form-data">
+            <!-- Title -->
+            <div class="mb-3">
+                <label for="paperTitle" class="form-label">Paper Title</label>
+                <input type="text" class="form-control" id="paperTitle" name="title" placeholder="Enter your paper title" required>
+            </div>
+        
+            <!-- Abstract -->
+            <div class="mb-3">
+                <label for="abstract" class="form-label">Abstract</label>
+                <textarea class="form-control" id="abstract" name="abstract" rows="5" placeholder="Provide a brief abstract of your research" required></textarea>
+            </div>
+        
+            <!-- Keywords -->
+            <div class="mb-3">
+                <label for="keywords" class="form-label">Keywords</label>
+                <input type="text" class="form-control" id="keywords" name="keywords" placeholder="Enter relevant keywords, separated by commas" required>
+            </div>
+        
+            <!-- Research Category -->
+            <div class="mb-3">
+                <label for="category" class="form-label">Research Category</label>
+                <select class="form-select" id="category" name="category" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="Natural Sciences">Natural Sciences</option>
+                    <option value="Social Sciences">Social Sciences</option>
+                    <option value="Engineering and Technology">Engineering and Technology</option>
+                    <option value="Medical and Health Sciences">Medical and Health Sciences</option>
+                    <option value="Agricultural Sciences">Agricultural Sciences</option>
+                    <option value="Humanities">Humanities</option>
+                    <option value="Economics and Business">Economics and Business</option>
+                    <option value="Computer Science and IT">Computer Science and IT</option>
+                    <option value="Environmental Sciences">Environmental Sciences</option>
+                    <option value="Education">Education</option>
+                </select>
+            </div>
+        
+            <!-- File Upload -->
+            <div class="mb-3">
+                <label for="paperFile" class="form-label">Upload Paper</label>
+                <input type="file" class="form-control" id="paperFile" name="paperFile" accept=".pdf,.doc,.docx" required>
+            </div>
+        
+            <!-- Submission Button -->
+            <div class="">
+                <button type="submit" class="btn btn-success btn-lg">Submit Paper</button>
+            </div>
+        </form>
+    </div>
+</div>

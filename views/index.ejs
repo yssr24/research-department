@@ -1,0 +1,7 @@
+<%- include('partials/links') %>
+<% if (typeof user !== 'undefined' && user.role === 'researcher') { %>
+    <%- include('partials/researcher/navbar') %>
+<% } else { %>
+    <%- include('partials/user/navbar') %>
+<% } %>
+<%- include(content) %>

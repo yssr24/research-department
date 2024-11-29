@@ -1,0 +1,21 @@
+<title>Sign Up - Mindoro State University</title>
+<div class="bg-img d-flex justify-content-center align-items-center vh-100">
+    <% if (typeof alertMessage !== 'undefined') { %>
+        <div class="alert alert-<%= alertType %> alert-dismissible fade show position-absolute w-25" role="alert" style="top: 20px; border-radius: 0.5rem;">
+            <%= alertMessage %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+    <div class="card p-4 shadow-lg">
+        <div class="text-center mb-4">
+            <img src="/images/logo.png" alt="Logo" width="80" height="80" class="mb-2">
+            <h4 class="fw-bold">Registration</h4>
+        </div>
+        <form action="/signup" method="POST">
+            <label for="email">Enter your email:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Submit</button>
+        </form>
+        <a href="/" class="btn btn-secondary mt-2">Back</a>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+
+<title>Login - Mindoro State University</title>
+<div class="bg-img d-flex justify-content-center align-items-center vh-100">
+    <% if (typeof alertMessage !== 'undefined') { %>
+        <div class="alert alert-<%= alertType %> alert-dismissible fade show position-absolute w-25" role="alert" style="top: 20px; border-radius: 0.5rem;">
+            <%= alertMessage %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+    <div class="card p-4 shadow-lg">
+        <div class="text-center mb-4">
+            <img src="/images/logo.png" alt="Logo" width="70" height="70" class="mb-2">
+            <h3 class="fw-bold">Mindoro State University</h3>
+        </div>
+        <form action="<%= showRegisterButton ? '/login' : '/admin/login' %>" method="POST">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-2">Login</button>
+        </form>
+        <% if (showRegisterButton) { %>
+            <a href="/signup" class="btn btn-secondary w-100 mt-2">Register</a>
+        <% } %>
+    </div>
+</div>
